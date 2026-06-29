@@ -1,0 +1,15 @@
+.venv/
+.git/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+__pycache__/
+*.py[cod]
+data/
+*.egg-info/
+.env
+.env.*
+!.env.example
+DEBUG_REPORT.md
+CONTINUATION.md

@@ -1,0 +1,7 @@
+walk_forward:
+  train_window_bars: 1716
+  validation_window_bars: 390
+  step_bars: 78
+  min_train_bars: 500
+  recency_decay_lambda: 0.02
+  horizons: [h1, h2, h3]

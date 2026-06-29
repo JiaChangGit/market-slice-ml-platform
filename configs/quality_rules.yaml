@@ -1,0 +1,7 @@
+gap_fill:
+  max_interpolation_bars: 3
+  interpolation_method: linear
+cross_provider:
+  close_difference_threshold: 0.005
+volume:
+  spike_multiplier: 5.0

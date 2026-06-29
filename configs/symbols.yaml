@@ -1,0 +1,13 @@
+target_symbols:
+  index_futures: [ES=F, NQ=F, YM=F, RTY=F]
+  etf_proxies: [SPY, QQQ, DIA, IWM]
+  major_stocks:
+    semis: [NVDA, AMD, TSM, AVGO, INTC, QCOM, MU]
+    big_tech: [AAPL, MSFT, GOOGL, META, AMZN, NFLX, TSLA]
+    finance_energy: [JPM, BAC, XOM, CVX]
+    consumer: [COST, WMT, HD, UNH, LLY]
+context_symbols:
+  commodity_futures: [CL=F, GC=F, HG=F, NG=F, SI=F, ZW=F, ZC=F, ZS=F]
+  commodity_etfs: [USO, GLD, SLV, UNG]
+  volatility: [^VIX]
+  sector_etfs: [XLK, XLF, XLE, XLV, XLI, XLY, XLP, XLU, XLRE, XLB, XLC, SOXX, SMH]

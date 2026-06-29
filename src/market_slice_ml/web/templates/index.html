@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Market Slice · 研究工作區</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body data-token-required="{{ 'true' if token_required else 'false' }}">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">Market Slice</div>
+      <nav aria-label="主要導覽">
+        <button class="nav-item is-active" data-panel="overview">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M5.5 10v10h13V10M9 20v-6h6v6"/></svg>
+          <span>總覽</span>
+        </button>
+        <button class="nav-item" data-panel="data">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg>
+          <span>Data</span>
+        </button>
+        <button class="nav-item" data-panel="slices">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg>
+          <span>Slices</span>
+        </button>
+        <button class="nav-item" data-panel="models">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.2 10.9 7.6-3.8M8.2 13.1l7.6 3.8"/></svg>
+          <span>Models</span>
+        </button>
+        <button class="nav-item" data-panel="predictions">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M7 15l4-5 3 2 5-7"/></svg>
+          <span>Predictions</span>
+        </button>
+        <button class="nav-item" data-panel="reports">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3Z"/><path d="M15 3v5h4M9 12h7M9 16h7"/></svg>
+          <span>Reports</span>
+        </button>
+      </nav>
+      <button class="collapse-button" id="collapse-nav" aria-label="收合導覽">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+        <span>收合</span>
+      </button>
+      <div class="version"><span class="status-dot"></span>v1.0.0 · local</div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="開啟導覽">☰</button>
+        <h1>研究工作區</h1>
+        <div class="topbar-actions">
+          <span class="local-state"><span class="status-dot"></span>僅限本機</span>
+          <button class="icon-button" id="settings-button" aria-label="API token 設定">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19 13.5 1.5 1-.8 2.1-1.8-.2a8 8 0 0 1-1.5 1.5l.2 1.8-2.1.8-1-1.5a8 8 0 0 1-2 0l-1 1.5-2.1-.8.2-1.8a8 8 0 0 1-1.5-1.5l-1.8.2-.8-2.1 1.5-1a8 8 0 0 1 0-2l-1.5-1 .8-2.1 1.8.2a8 8 0 0 1 1.5-1.5l-.2-1.8 2.1-.8 1 1.5a8 8 0 0 1 2 0l1-1.5 2.1.8-.2 1.8a8 8 0 0 1 1.5 1.5l1.8-.2.8 2.1-1.5 1a8 8 0 0 1 0 2Z"/></svg>
+            <span>設定</span>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel-view is-active" id="panel-overview" aria-labelledby="overview-title">
+          <h2 class="sr-only" id="overview-title">總覽</h2>
+          <ol class="pipeline" id="pipeline-stages" aria-label="研究 pipeline"></ol>
+
+          <section class="content-section environment-section">
+            <div class="section-heading"><h2>環境摘要</h2><button class="text-button" id="open-diagnostics">開啟 diagnostics</button></div>
+            <div class="environment-grid" id="environment-grid"></div>
+          </section>
+
+          <section class="content-section">
+            <div class="section-heading"><h2>Provider readiness</h2></div>
+            <div class="table-wrap">
+              <table><thead><tr><th>Provider</th><th>狀態</th><th>Credentials</th><th>說明</th><th>建議處理</th></tr></thead><tbody id="provider-rows"></tbody></table>
+            </div>
+          </section>
+
+          <section class="content-section jobs-section">
+            <div class="section-heading"><h2>最近 Jobs</h2></div>
+            <div class="table-wrap">
+              <table><thead><tr><th>Job</th><th>類型</th><th>狀態</th><th>開始時間 UTC</th><th>結果</th></tr></thead><tbody id="job-rows"></tbody></table>
+            </div>
+            <div class="section-actions"><span id="job-count" class="muted"></span><button class="primary-button" id="refresh-status">重新整理狀態</button></div>
+          </section>
+        </section>
+
+        <section class="panel-view" id="panel-data" aria-labelledby="data-title">
+          <div class="page-heading"><div><h2 id="data-title">Data pipeline</h2><p>Live Fetch 受 <code>NO_NETWORK</code> 控制；所有 raw Bars 採 append-only 儲存。</p></div></div>
+          <div class="split-layout">
+            <form class="form-panel" id="fetch-form">
+              <h3>Fetch 歷史 Bars</h3>
+              <label>Provider<select name="provider"><option value="yfinance">yfinance</option><option value="stooq">Stooq</option><option value="ibkr_historical">IBKR historical</option><option value="alpha_vantage">Alpha Vantage</option><option value="cboe">Cboe</option><option value="akshare">AKShare</option></select></label>
+              <label>Symbols<input name="symbols" value="NVDA, AMD, NQ=F" autocomplete="off" spellcheck="false"></label>
+              <div class="form-row"><label>Interval<input name="interval" value="5m" autocomplete="off"></label><label>開始日期<input name="start" type="date" required></label><label>結束日期<input name="end" type="date" required></label></div>
+              <button class="primary-button" type="submit">送出 Fetch Job</button>
+            </form>
+            <section class="form-panel">
+              <h3>建立衍生資料</h3>
+              <p class="muted">依序執行以維持 deterministic Dataset fingerprint。</p>
+              <div class="stacked-actions"><button class="secondary-button job-action" data-job="canonical">建立 Canonical 5m</button><button class="secondary-button job-action" data-job="features">建立 Features</button><button class="secondary-button job-action" data-job="labels">建立 Labels</button></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="panel-view" id="panel-slices" aria-labelledby="slices-title">
+          <div class="page-heading"><div><h2 id="slices-title">Synchronized Slices</h2><p>所有 Symbol 使用相同 train／validation 時間邊界。</p></div><button class="primary-button" id="build-slices">建立 Slices</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Slice</th><th>Symbols</th><th>Train end UTC</th><th>Validation start UTC</th><th>Fingerprint</th></tr></thead><tbody id="slice-rows"></tbody></table></div>
+        </section>
+
+        <section class="panel-view" id="panel-models" aria-labelledby="models-title">
+          <div class="page-heading"><div><h2 id="models-title">Model runs</h2><p>GBM、LSTM 與 GNN fallback 共用 Symbol embedding 與三個 prediction heads。</p></div></div>
+          <form class="toolbar-form" id="train-form"><label>Horizon<select name="horizon"><option value="all">all</option><option value="h1">h1</option><option value="h2">h2</option><option value="h3">h3</option></select></label><label class="check-label"><input type="checkbox" name="force">強制重訓</label><button class="primary-button" type="submit">送出 Training Job</button></form>
+          <div class="table-wrap"><table><thead><tr><th>Run</th><th>Slice</th><th>Horizon</th><th>建立時間 UTC</th><th>GBM accuracy</th><th>LSTM accuracy</th><th>GNN accuracy</th></tr></thead><tbody id="model-rows"></tbody></table></div>
+        </section>
+
+        <section class="panel-view" id="panel-predictions" aria-labelledby="predictions-title">
+          <div class="page-heading"><div><h2 id="predictions-title">Research Predictions</h2><p>公開輸出固定六欄，不包含 signal、部位或進出場建議。</p></div></div>
+          <form class="toolbar-form" id="prediction-form"><label>Symbol<input name="symbol" value="NQ=F" required autocomplete="off" spellcheck="false"></label><label>Horizon<select name="horizon"><option value="h1">h1</option><option value="h2">h2</option><option value="h3">h3</option></select></label><button class="primary-button" type="submit">產生 Prediction</button></form>
+          <div class="prediction-result" id="prediction-result"><p class="empty-state">尚未選擇 Prediction。正常模式不會使用 synthetic fallback。</p></div>
+        </section>
+
+        <section class="panel-view" id="panel-reports" aria-labelledby="reports-title">
+          <div class="page-heading"><div><h2 id="reports-title">Reports</h2><p>Self-contained HTML，不載入 CDN 或外部資源。</p></div><button class="primary-button" id="build-report">建立 Report</button></div>
+          <div class="report-list" id="report-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <aside class="detail-panel" id="job-detail" aria-labelledby="job-detail-title" aria-hidden="true">
+      <div class="detail-header"><h2 id="job-detail-title">選取的 Job</h2><button id="close-detail" aria-label="關閉 Job 詳細資料">×</button></div>
+      <div id="job-detail-content"><p class="empty-state">請從最近 Jobs 選取一筆紀錄。</p></div>
+    </aside>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

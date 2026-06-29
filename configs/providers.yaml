@@ -1,0 +1,23 @@
+providers:
+  yfinance:
+    enabled: true
+    priority: 10
+  stooq:
+    enabled: true
+    priority: 20
+  ibkr_historical:
+    enabled: false
+    priority: 5
+  alpha_vantage:
+    enabled: false
+    priority: 30
+  cboe:
+    enabled: true
+    priority: 40
+  akshare:
+    enabled: false
+    priority: 50
+  schwab:
+    enabled: false
+  ibkr_realtime:
+    enabled: false

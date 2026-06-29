@@ -1,0 +1,4 @@
+display_timezone: Asia/Taipei
+self_contained: true
+ui_locale: zh-TW
+external_urls: false

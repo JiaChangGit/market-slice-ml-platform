@@ -1,0 +1,38 @@
+horizons: {h1: 12, h2: 78, h3: 390}
+labels:
+  bullish_threshold: 0.003
+  bearish_threshold: -0.003
+datasets:
+  sequence_length: 64
+  feature_columns:
+    - log_return_1
+    - log_return_3
+    - log_return_12
+    - rsi_14
+    - ema_9
+    - ema_21
+    - ema_50
+    - atr_14
+    - high_low_range_pct
+    - sma_ratio_5
+    - sma_ratio_20
+    - vwap_dev_pct
+    - obv
+    - relative_volume
+    - realized_vol_12bar
+    - realized_vol_78bar
+    - vix_level
+    - xasset_weighted_return_1
+    - xasset_weighted_return_12
+    - session_label_enc
+    - bar_index_in_session
+    - time_sin
+    - time_cos
+    - day_of_week_sin
+    - day_of_week_cos
+models:
+  asset_embedding_dim: 16
+  tree: {n_estimators: 200}
+  lstm: {hidden_size: 128, n_layers: 2, dropout: 0.2, epochs: 20}
+  gnn: {hidden_dim: 64, heads: 4, epochs: 20}
+loss: {return_alpha: 0.5, volatility_beta: 0.5}

@@ -1,0 +1,5 @@
+relationships:
+  - {source: NVDA, target: NQ=F, static_weight: 0.15, relationship_type: component_influence}
+  - {source: AMD, target: NVDA, static_weight: 0.12, relationship_type: sector_peer}
+  - {source: NQ=F, target: AMD, static_weight: 0.20, relationship_type: index_driver}
+  - {source: GC=F, target: GLD, static_weight: 0.95, relationship_type: etf_tracking}

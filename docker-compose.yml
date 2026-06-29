@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    volumes:
+      - market_data:/app/data
+    environment:
+      DATA_ROOT: /app/data
+      NO_NETWORK: "1"
+      IBKR_HOST: ${IBKR_HOST:-auto}
+      IBKR_PORT: ${IBKR_PORT:-7497}
+      IBKR_CLIENT_ID: ${IBKR_CLIENT_ID:-1}
+      ALPHA_VANTAGE_API_KEY: ${ALPHA_VANTAGE_API_KEY:-}
+      AKSHARE_ENABLED: ${AKSHARE_ENABLED:-false}
+      DATA_START_DATE: ${DATA_START_DATE:-2022-01-01}
+      DATA_END_DATE: ${DATA_END_DATE:-}
+    stdin_open: true
+    tty: true
+volumes:
+  market_data:
+    name: market_slice_data
